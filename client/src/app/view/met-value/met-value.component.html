@@ -1,0 +1,35 @@
+<div class="container py-4">
+<h4 class="text-center alert alert-info" *ngFor="let user of users">Add Activity Data For {{user.name}} {{user._id}} {{user.weight}}</h4>
+<form [formGroup]="metValueForm" (ngSubmit)="postData()">
+          <div class="dropdown">
+          <label for="activity">Select Activity Name</label>
+                  <select  id="activity" (change)="activityData(metValueForm)" formControlName="activity">
+                      <option selected>-select-</option>
+                      <option *ngFor="let name of activityName" >{{name}}</option>
+                  </select>
+          </div>
+          <div class="dropdown">
+              <label for="specific_motion">Select Activity Description</label>
+              <select id="specific_motion" (change)="getMotionData(metValueForm)" formControlName="specific_motion">
+                  <option selected>-select-</option>
+                  <option *ngFor="let motion of specificMotion">{{motion}}</option>
+              </select>
+          </div>
+      <div class="dropdown">
+          <label for="met">Met Value</label>
+          <select id="met" formControlName="met">
+          
+              <option selected>-select-</option>
+              <option *ngFor="let met of mets">{{met.met}}</option>
+          </select>
+      </div>
+      <div class="form_group">
+    
+    <label for="duration">Enter duration</label>
+    <input type="text" id="duration" formControlName="duration" required placeholder="Enter in minutes">
+    
+      </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+
+</form>
+</div>

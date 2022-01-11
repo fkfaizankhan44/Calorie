@@ -1,0 +1,62 @@
+<div class="container py-4">
+    <h4 class="text-center alert alert-info">{{title}}</h4>
+    <!-- <p *ngIf="dataSaved" ngClass="success" class="text-right">{{message}}</p> -->
+
+    <form [formGroup]="userForm" (ngSubmit)="postData()">
+      <div class="row">
+        <div class="col-md-4">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text"   class="form-control" id="name" formControlName="name" name="name" required placeholder="Enter Your Name">
+      </div>
+      </div>
+
+      <div class="col-md-4">
+      <div class="form-group">
+        <label for="weight">Weight</label>
+        <input type="text" class="form-control" id="weight" formControlName="weight" name="weight"required placeholder="Enter in Kg">
+      </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+        <label for="height">Height</label>
+        <input type="floatformat" class="form-control" id="height" formControlName="height" name="height"required placeholder="Enter in Feet">
+      </div>
+      </div>
+
+      <div class="col-md-4">
+            <div class="form-group">
+      <label for="gender">Gender</label>
+      <select id="gender" formControlName="gender" name="gender"required>
+        <option selected>--select--</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+        <label for="age">Age</label>
+        <input type="floatformat" class="form-control" id="age" formControlName="age" name="age"required placeholder="Enter Age">
+      </div>
+      </div>
+
+      <div class="col-md-4">
+      <div class="form-group">
+        <label for="dob">DOB</label>
+        <input type="date" class="form-control" id="dob" formControlName="dob" name="dob" required>
+      </div>
+      </div>
+
+
+
+<button class="btn btn-primary" type="submit">Submit</button>&nbsp;
+<button class="btn btn-primary" (click)="resetForm()">Reset</button>
+
+</div>
+
+  
+</form>
+</div>

@@ -1,0 +1,25 @@
+
+<div class="container py-4">
+    <div class='row'>
+        <div class='col-sm-12'>
+            <h4 class= "text-center alert alert-info">Met Data</h4>
+                <div class="text-center">
+                    <table class="table table-hover">
+                        <tr class="text-center">
+                            <th  scope="col">ID</th>
+                            <th  scope="col">Activity</th>
+                            <th  scope="col">Specific Motion</th>
+                            <th  scope="col">Mets</th>                            
+                        </tr>
+
+                        <tr  class="text-center" *ngFor="let met of mets" >
+                            <td>{{met.id}}</td>
+                            <td>{{met.activity}}</td>
+                            <td>{{met.specific_motion}}</td>
+                            <td>{{met.met}}</td>                        
+                        </tr>
+                    </table>
+                </div>
+        </div>
+    </div>
+</div>

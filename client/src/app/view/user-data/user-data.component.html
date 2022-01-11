@@ -1,0 +1,47 @@
+<div class="container py-4">
+    <i class="fa fa-user-plus" style="font-size:40px;color:green;" (click)="openDialog()"></i>&nbsp;
+</div>
+<div class="container py-4">
+    <div class='row'>
+        <div class='col-sm-12'>
+            <h4 class= "text-center alert alert-info">Select User For Add Calorie</h4>
+                <div class="text-center">
+                    <table class="table table-hover">
+                        <tr class="text-center">
+                            <th  scope="col">Name</th>
+                            <th  scope="col">Weight</th>
+                            <th  scope="col">Height</th>
+                            <th  scope="col">Gender</th>
+                            <th  scope="col">Age</th>
+                            <th  scope="col">DOB</th>
+                            <th scope="col">BMR</th>
+                            <th  scope="col">Action</th>
+                            
+                        </tr>
+
+                        <tr  class="text-center" *ngFor="let user of users; let i = index" >    
+                            <td>{{user.name}}</td>
+                            <td>{{user.weight}} kg</td>
+                            <td>{{user.height}} feet</td>
+                            <td>{{user.gender}}</td>
+                            <td>{{user.age}}</td>
+                            <td>{{user.dob|date:"dd//MM/yyyy"}}</td>
+                            <td>{{user.bmr}}</td> 
+                            <td>
+                                <i class="fa fa-edit" style="font-size:40px;color:green;"(click)="updateUser(user._id)"></i>&nbsp;&nbsp;
+                                <i class="fa fa-trash" style="font-size:40px;color:red;" (click)="deleteUser(user._id,i)"></i>&nbsp;&nbsp;
+                                <i class="fa fa-eye" style="font-size:40px;color:black" (click)="viewRecords(user._id,true)"></i>&nbsp;&nbsp;
+
+                                <button class="alert alert-info" (click)="addRecords(user._id,false)">Add Data</button>
+
+
+                                
+
+                            </td>
+                           
+                    </tr>
+                    </table>
+                </div>
+        </div>
+    </div>
+</div>

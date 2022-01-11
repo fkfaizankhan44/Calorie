@@ -1,0 +1,41 @@
+<div class="container py-4">
+    <i class="fa fa-user-plus" *ngIf="!is_calender" style="font-size:40px;" (click)="openDialog()"></i>
+    <!-- <i class="fa fa-eye" *ngIf="is_calender" style="font-size:40px;color:red;float:right" (click)="viewRecords()"></i> -->
+</div>
+
+<div class="container py-4">
+    <div class='row'>
+        <div class='col-sm-12'>
+            <h4 class= "text-center alert alert-info">Calorie Data &nbsp;&nbsp;&nbsp;&nbsp; calorie IN:- {{calorieIN}}</h4>
+                <div class="text-center">
+                    <table class="table table-hover">
+                        <tr class="text-center">
+                            <th scope="col">User Name</th>
+                            <th  scope="col">Food Name</th>
+                            <th  scope="col">Food Group</th>
+                            <th  scope="col">Calories</th> 
+                            <th  scope="col">Serving</th> 
+                            <th scope="col">Meal type</th>
+                            <th scope="col">Action</th>
+                        </tr>
+
+                        <tr  class="text-center" *ngFor="let food of foods; let i = index" >
+                            <td>{{food.userName}}</td>
+                            <td>{{food.name}}</td>
+                            <td>{{food.food_group}}</td>
+                            <td>{{food.calories}}</td> 
+                            <td>{{food.serving_description}}</td>    
+                            <td>{{food.meal}}</td>     
+                            <td>
+                            <i class="fa fa-trash" style="font-size:40px;color:red;" (click)="deleteData(food._id,i)"></i>
+
+                            </td>               
+
+                    </tr>
+                    </table>
+                </div>
+                <button class="btn btn-primary"  style="margin: auto; " (click)="sendData()" >Submit</button>
+                
+        </div>
+    </div>
+</div>

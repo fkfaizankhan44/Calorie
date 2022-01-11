@@ -1,0 +1,20 @@
+<div>
+    <h4 class="text-center alert alert-info">View Calorie Data </h4>
+    <div class="row">
+        <div class="col-sm-6">
+            <app-calorie-data (newFoodEvent)="addFood($event)"></app-calorie-data>
+            <!-- <h4 class="text-center alert alert-info">Calorie IN:-{{calorieIN}}</h4> -->
+        </div>
+        <div class="col-sm-6">
+            <app-met-value-data (newMetEvent)="addMet($event)"></app-met-value-data>
+            <!-- <h4 class="text-center alert alert-info">Calorie OUT:-{{calorieOUT}}</h4> -->
+
+        </div>
+    <button class="btn btn-primary" style="margin: auto; " (click)="postData()" >Calculate Net Calorie</button>
+
+    </div>
+    </div>
+<div class="container py-4">
+    <h4 class="text-center alert alert-info">Net Calorie:-  {{netCalorie}}</h4>
+
+</div>

@@ -1,0 +1,43 @@
+<div class="container py-4">
+<h4 class="text-center alert alert-info" *ngFor="let user of users">Add Calorie Data For {{user.name}}</h4>
+<form [formGroup]="calorieForm" (ngSubmit)="postData()">
+            <div class="form-group">
+            <label for="food_group">Select Food Group</label>
+                    <select  id="food_group" (change)="foodData(calorieForm)" formControlName="food_group">
+                        <option selected>--select--</option>
+                        <option *ngFor="let food of foodGroup" >{{food}}</option>
+                    </select>
+            </div>
+            <div class="dropdown">
+                <label for="name">Select Food Name</label>
+                <select id="name" (change)="foodName(calorieForm)" formControlName="name">
+                
+                    <option selected>--select--</option>
+                    <option *ngFor="let food of foodNames">{{food}}</option>
+                </select>
+            </div>
+        <div class="dropdown">
+            <label for="meal">Meal Type</label>
+            <select id="meal" formControlName="meal">
+                <option selected>--select--</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+            </select>
+        </div>
+
+        <!-- <div class="dropdown">
+            <label for="serving">Serving</label>
+            <select id="serving" formControlName="serving_description">
+            
+                <option selected>--select--</option>
+                <option *ngFor="let food of foods">{{food.serving_description}}</option>
+            </select>
+        </div> -->
+        <div class="form-group">
+            <label for="serving_description">Serving </label>
+            <input type="number" class="form-control" id="serving_description" formControlName="serving_description" name="serving_description"required placeholder="Enter serving">
+          </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+</div>

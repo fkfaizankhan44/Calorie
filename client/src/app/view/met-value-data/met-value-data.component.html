@@ -1,0 +1,42 @@
+<div class="container py-4">
+    <i class="fa fa-user-plus" *ngIf="!is_calender" style="font-size:40px;" (click)="openDialog()"></i>
+    <i class="fa fa-calendar" *ngIf="is_calender" style="font-size:40px;color:green;float:right" (click)="viewRecords()"></i>
+</div>
+
+
+<div class="container py-4">
+    
+    <div class='row'>
+        <div class='col-sm-12'>
+            <h4 class= "text-center alert alert-info">Met Data  &nbsp;&nbsp;&nbsp;&nbsp; calorie OUT:- {{calorieOUT}}</h4>
+                <div class="text-center">
+                    <table class="table table-hover">
+                        <tr class="text-center">
+                            <th  scope="col">User Name</th>
+                            <th  scope="col">Activity</th>
+                            <th  scope="col">Specific Motion</th>
+                            <th  scope="col">Mets</th>  
+                            <th scope="col">Duration (minutes)</th>  
+                            <th scope="col">Calories Burnt</th>  
+                            <th scope= "col">Action</th>                      
+                        </tr>
+
+                        <tr  class="text-center" *ngFor="let met of mets; let i = index" >
+                            <td>{{met.userName}}</td>
+                            <td>{{met.activity}}</td>
+                            <td>{{met.specific_motion}}</td>
+                            <td>{{met.met}}</td>    
+                            <td>{{met.duration}}</td>    
+                            <td>{{met.calorieOut}}</td> 
+                            <td> 
+                            <!-- <i class="fa fa-edit" style="font-size:40px;color:green;"(click)="updateData(met.id)"></i>&nbsp; -->
+                            <i class="fa fa-trash" style="font-size:40px;color:red;" (click)="deleteData(met._id,i)"></i>
+                            </td>              
+                    </tr>
+                    </table>
+                </div>
+                <button class="btn btn-primary" style="margin: auto; " (click)="sendData()" >Submit</button>
+
+        </div>
+    </div>
+</div>
