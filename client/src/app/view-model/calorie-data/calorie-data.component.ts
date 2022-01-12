@@ -29,7 +29,7 @@ export class CalorieDataComponent implements OnInit {
   calorieIN: number;
   is_calender: string | boolean
 
-  constructor(private activatedRoute: ActivatedRoute, private calorieService: CalorieService, private matDialog: MatDialog, private userService: UserService) {
+  constructor(private _activatedRoute: ActivatedRoute, private _calorieService: CalorieService, private _matDialog: MatDialog, private _userService: UserService) {
     this.foods = []
     this.calorieIN = 0
     this.is_calender = false
@@ -38,7 +38,7 @@ export class CalorieDataComponent implements OnInit {
 
 
 
-    this.routeData = this.activatedRoute.snapshot.params
+    this.routeData = this._activatedRoute.snapshot.params
     this.is_calender = this.routeData.calender
     if (this.is_calender === "false") {
       this.is_calender = false
@@ -53,7 +53,7 @@ export class CalorieDataComponent implements OnInit {
 
 
     if (this.routeData) {
-      this.userService.getUserById(this.routeData.id).subscribe(users => {
+      this._userService.getUserById(this.routeData.id).subscribe(users => {
         for (let user of users) {
           this.userId = user._id
           this.userName = user.name
@@ -61,7 +61,7 @@ export class CalorieDataComponent implements OnInit {
         }
       })
     }
-    this.matDialog.afterAllClosed.subscribe((foods: any) => {
+    this._matDialog.afterAllClosed.subscribe((foods: any) => {
       if (foods && Object.keys(foods).length !== 0) {
         if (foods.key === "foods") {
 
@@ -91,12 +91,12 @@ export class CalorieDataComponent implements OnInit {
 
       }
 
-      this.matDialog.closeAll();
+      this._matDialog.closeAll();
     })
 
   }
   getFood(data?: any) {
-    this.calorieService.getCalorieInfo(data).subscribe(foods => {
+    this._calorieService.getCalorieInfo(data).subscribe(foods => {
       this.foods = foods
       let cal = 0
       for (let i of this.foods) {
@@ -106,7 +106,7 @@ export class CalorieDataComponent implements OnInit {
     });
   }
   openDialog() {
-    this.matDialog.open(CalorieInComponent, {
+    this._matDialog.open(CalorieInComponent, {
       data: [
         this.userId = this.userId,
         this.userName = this.userName,
@@ -117,7 +117,7 @@ export class CalorieDataComponent implements OnInit {
   deleteData(_id: any, i: number) {
 
     if (_id) {
-      this.calorieService.deleteCalorieInfo(_id).subscribe(foods => {
+      this._calorieService.deleteCalorieInfo(_id).subscribe(foods => {
         this.foods.splice(i, 1)
       })
 
@@ -128,7 +128,7 @@ export class CalorieDataComponent implements OnInit {
     }
   }
   viewRecords() {
-    this.matDialog.open(CalenderComponent, {});
+    this._matDialog.open(CalenderComponent, {});
   }
   sendData() {
     this.newFoodEvent.emit(this.foods)

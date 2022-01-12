@@ -39,13 +39,10 @@ export class MetValueComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any[],
-    private matDialog: MatDialog,
-    private frmBuilder: FormBuilder,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private metService: MetService,
-    private metValueService: MetValueService,
-    private userService: UserService
+    private _matDialog: MatDialog,
+    private _frmBuilder: FormBuilder,
+    private _metService: MetService,
+    private _metValueService: MetValueService
   ) {
     this.activity_name = []
     this.activityName = []
@@ -65,7 +62,7 @@ export class MetValueComponent implements OnInit {
 
 
 
-    this.metValueForm = frmBuilder.group(
+    this.metValueForm = this._frmBuilder.group(
       {
         id: new FormControl(0),
         activity: new FormControl(""),
@@ -83,7 +80,7 @@ export class MetValueComponent implements OnInit {
   }
 
   getMet() {
-    this.metService.getMetInfo().subscribe(mets => {
+    this._metService.getMetInfo().subscribe(mets => {
       this.mets = mets
       for (let met of mets) {
         this.activity_name.push(met.activity)
@@ -98,7 +95,7 @@ export class MetValueComponent implements OnInit {
     this.activity = metValueForm.controls.activity.value
     this.getId = this.activity
     this.specificMotion = Object.assign([], new Met())
-    this.metService.getActivity(this.getId).subscribe(mets => {
+    this._metService.getActivity(this.getId).subscribe(mets => {
       this.specificMotion = mets
       for (let met of mets) {
         this.specific_motion.push(met.specific_motion)
@@ -112,7 +109,7 @@ export class MetValueComponent implements OnInit {
   getMotionData(metValueForm: any) {
     this.motion = metValueForm.controls.specific_motion.value
     this.getId = this.motion
-    this.metService.getMotion(this.getId).subscribe(mets => {
+    this._metService.getMotion(this.getId).subscribe(mets => {
       this.mets = mets
       for (let met of mets) {
         this.id = met.id
@@ -132,9 +129,9 @@ export class MetValueComponent implements OnInit {
 
 
     data.calorieOut = (data.met * data.userWeight * (data.duration) / 60)
-    this.metValueService.postMetValueInfo(data).subscribe(mets => { mets });
+    this._metValueService.postMetValueInfo(data).subscribe(mets => { mets });
     const keyObject = { key: "met", data: data }
-    this.matDialog._getAfterAllClosed().next(keyObject as any);
-    this.matDialog.closeAll();
+    this._matDialog._getAfterAllClosed().next(keyObject as any);
+    this._matDialog.closeAll();
   }
 }

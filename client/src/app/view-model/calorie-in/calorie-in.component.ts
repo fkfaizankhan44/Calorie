@@ -46,7 +46,7 @@ export class CalorieInComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any[],
 
-    private frmBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private foodService: FoodService, private calorieService: CalorieService, private userService: UserService, private matDialog: MatDialog) {
+    private _frmBuilder: FormBuilder, private _foodService: FoodService, private _calorieService: CalorieService, private _matDialog: MatDialog) {
     this.food_group = []
     this.foodGroup = []
     this.foodNames = []
@@ -65,7 +65,7 @@ export class CalorieInComponent implements OnInit {
     this.userBmr = data[2]
 
     this.serving_description = 0
-    this.calorieForm = frmBuilder.group(
+    this.calorieForm = this._frmBuilder.group(
       {
         id: new FormControl(0),
         name: new FormControl(''),
@@ -83,7 +83,7 @@ export class CalorieInComponent implements OnInit {
   }
 
   getFood() {
-    this.foodService.getFoodInfo().subscribe(foods => {
+    this._foodService.getFoodInfo().subscribe(foods => {
       for (let food of foods) {
         this.food_group.push(food.food_group)
       }
@@ -100,7 +100,7 @@ export class CalorieInComponent implements OnInit {
     this.FoodGroup = calorieForm.controls.food_group.value
     this.getId = this.FoodGroup
 
-    this.foodService.getFoodGroup(this.getId).subscribe(foods => {
+    this._foodService.getFoodGroup(this.getId).subscribe(foods => {
       for (let food of foods) {
         this.food_name.push(food.name)
       }
@@ -111,7 +111,7 @@ export class CalorieInComponent implements OnInit {
   foodName(calorieForm: any) {
     this.FoodName = calorieForm.controls.name.value
     this.getId = this.FoodName
-    this.foodService.getFoodName(this.getId).subscribe(foods => {
+    this._foodService.getFoodName(this.getId).subscribe(foods => {
       this.foods = foods
       for (let food of foods) {
         this.calorie = food.calories
@@ -135,11 +135,11 @@ export class CalorieInComponent implements OnInit {
     data.userId = this.userId
     data.userName = this.userName
     data.userBmr = this.userBmr
-    this.calorieService.postCalorieInfo(data).subscribe(foods => {
+    this._calorieService.postCalorieInfo(data).subscribe(foods => {
       this.foods = foods
     });
     const keyObject = { key: "foods", data: data }
-    this.matDialog._getAfterAllClosed().next(keyObject as any);
-    this.matDialog.closeAll();
+    this._matDialog._getAfterAllClosed().next(keyObject as any);
+    this._matDialog.closeAll();
   }
 }

@@ -20,14 +20,12 @@ export class CalenderComponent implements OnInit {
   constructor(
 
     @Inject(MAT_DIALOG_DATA) public data: any[],
-    private frmBuilder: FormBuilder,
-    private router: Router,
-    private matDialog: MatDialog,
-    private activatedRoute: ActivatedRoute) {
+    private _frmBuilder: FormBuilder,
+    private _matDialog: MatDialog) {
 
     this.data1 = data[0]
     this.recordsDate = new Date()
-    this.recordsForm = frmBuilder.group(
+    this.recordsForm = this._frmBuilder.group(
       {
         recordsDate: new FormControl()
       }
@@ -42,8 +40,8 @@ export class CalenderComponent implements OnInit {
     const data = this.recordsForm.value
     data.userId = this.data1
     const keyObject = { key: "cal", data: data }
-    this.matDialog._getAfterAllClosed().next(keyObject as any);
-    this.matDialog.closeAll();
+    this._matDialog._getAfterAllClosed().next(keyObject as any);
+    this._matDialog.closeAll();
   }
 
 }
