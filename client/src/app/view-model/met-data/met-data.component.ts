@@ -13,7 +13,7 @@ import { Met } from 'src/app/interface/met-data/met.model';
 export class MetDataComponent implements OnInit {
   mets: Met[]
 
-  constructor(private activatedRoute: ActivatedRoute, private metService: MetService) {
+  constructor(private _metService: MetService) {
     this.mets = Object.assign([], new Met())
     console.log(this.mets)
 
@@ -22,7 +22,7 @@ export class MetDataComponent implements OnInit {
   }
 
   getMet() {
-    this.metService.getMetInfo().subscribe(mets => {
+    this._metService.getMetInfo().subscribe(mets => {
       this.mets = mets
 
       console.log(this.mets)

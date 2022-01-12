@@ -12,7 +12,7 @@ export class FoodDataComponent implements OnInit {
 
   foods: Food[]
 
-  constructor(private activatedRoute: ActivatedRoute, private foodService: FoodService) {
+  constructor(private _foodService: FoodService) {
     this.foods = Object.assign([], new Food())
     console.log(this.foods)
 
@@ -21,7 +21,7 @@ export class FoodDataComponent implements OnInit {
   }
 
   getFood() {
-    this.foodService.getFoodInfo().subscribe(foods => {
+    this._foodService.getFoodInfo().subscribe(foods => {
       this.foods = foods
 
       console.log(this.foods)

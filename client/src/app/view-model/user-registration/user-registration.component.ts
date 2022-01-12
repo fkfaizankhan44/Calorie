@@ -25,8 +25,8 @@ export class UserRegistrationComponent implements OnInit {
   name: any;
   bmr: number = 0;
 
-  constructor(private frmBuilder: FormBuilder, private router: Router, private userService: UserService, private matDialog: MatDialog) {
-    this.userForm = frmBuilder.group(
+  constructor(private _frmBuilder: FormBuilder, private _userService: UserService, private _matDialog: MatDialog) {
+    this.userForm = _frmBuilder.group(
       {
         name: new FormControl(),
         weight: new FormControl(),
@@ -38,7 +38,7 @@ export class UserRegistrationComponent implements OnInit {
     );
   }
   ngOnInit(): void {
-    this.userForm = this.frmBuilder.group(
+    this.userForm = this._frmBuilder.group(
       {
         name: ['', [Validators.required]],
         weight: ['', [Validators.required]],
@@ -56,11 +56,11 @@ export class UserRegistrationComponent implements OnInit {
     else {
       data.bmr = (665.0955 + (9.5634 * (data.weight)) + (1.8496 * 30.48 * (data.height)) - (4.6756 * (data.age)))
     }
-    this.userService.postUsersInfo(data).subscribe(users => {
+    this._userService.postUsersInfo(data).subscribe(users => {
       this.users = users
-      this.matDialog._getAfterAllClosed().next(users as any);
+      this._matDialog._getAfterAllClosed().next(users as any);
     });
-    this.matDialog.closeAll();
+    this._matDialog.closeAll();
     this.resetForm();
   }
   resetForm() {

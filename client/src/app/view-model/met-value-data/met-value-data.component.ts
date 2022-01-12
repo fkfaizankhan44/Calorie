@@ -36,19 +36,19 @@ export class MetValueDataComponent implements OnInit {
   calorieOUT: number;
   is_calender: string | boolean
 
-  constructor(private activatedRoute: ActivatedRoute, private metValueService: MetValueService, private router: Router, public matDialog: MatDialog, private userService: UserService) {
+  constructor(private _activatedRoute: ActivatedRoute, private _metValueService: MetValueService, private _router: Router, private _matDialog: MatDialog, private _userService: UserService) {
     this.mets = []
     this.users = Object.assign([], new User())
     this.userWeight = 0
     this.userId = ""
     this.userName = ""
     this.calorieOUT = 0
-    this.routeData = activatedRoute.snapshot.params
+    this.routeData = _activatedRoute.snapshot.params
     this.is_calender = false
 
 
     if (this.routeData) {
-      this.userService.getUserById(this.routeData.id).subscribe(users => {
+      this._userService.getUserById(this.routeData.id).subscribe(users => {
         this.users = users
         for (let user of users) {
           this.userId = user._id
@@ -60,7 +60,7 @@ export class MetValueDataComponent implements OnInit {
     }
   }
   openDialog() {
-    this.matDialog.open(MetValueComponent, {
+    this._matDialog.open(MetValueComponent, {
       data: [
         this.userId = this.userId,
         this.userName = this.userName,
@@ -71,7 +71,7 @@ export class MetValueDataComponent implements OnInit {
   }
   ngOnInit() {
 
-    this.routeData = this.activatedRoute.snapshot.params
+    this.routeData = this._activatedRoute.snapshot.params
     this.is_calender = (this.routeData.calender)
     if (this.is_calender === "true") {
       this.is_calender = true
@@ -85,7 +85,7 @@ export class MetValueDataComponent implements OnInit {
       this.getMet(value);
     }
 
-    this.matDialog.afterAllClosed.subscribe((mets: any) => {
+    this._matDialog.afterAllClosed.subscribe((mets: any) => {
       if (mets && Object.keys(mets).length !== 0) {
 
         if (mets.key === "met") {
@@ -118,13 +118,13 @@ export class MetValueDataComponent implements OnInit {
         }
       }
 
-      this.matDialog.closeAll();
+      this._matDialog.closeAll();
     })
 
   }
 
   getMet(data?: any) {
-    this.metValueService.getMetValueInfo(data).subscribe(mets => {
+    this._metValueService.getMetValueInfo(data).subscribe(mets => {
       this.mets = mets
       let cal = 0
       for (let i of this.mets) {
@@ -147,12 +147,12 @@ export class MetValueDataComponent implements OnInit {
 
 
   addActivity() {
-    this.router.navigate(['/met-value'])
+    this._router.navigate(['/met-value'])
   }
 
   deleteData(_id: any, i: number) {
     if (_id) {
-      this.metValueService.deleteMetValueInfo(_id).subscribe(mets => {
+      this._metValueService.deleteMetValueInfo(_id).subscribe(mets => {
         this.mets.splice(i, 1)
       })
     }
@@ -163,7 +163,7 @@ export class MetValueDataComponent implements OnInit {
   }
 
   viewRecords() {
-    this.matDialog.open(CalenderComponent, { data: [this.routeData.id] });
+    this._matDialog.open(CalenderComponent, { data: [this.routeData.id] });
   }
   sendData() {
     this.newMetEvent.emit(this.mets)

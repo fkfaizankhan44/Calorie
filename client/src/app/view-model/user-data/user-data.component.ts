@@ -23,18 +23,17 @@ export class UserDataComponent implements OnInit {
 
 
   allUsers: Observable<user[]> | undefined
-  constructor(private activatedRoute: ActivatedRoute, private userService: UserService, private router: Router, private matDialog: MatDialog) {
+  constructor(private _userService: UserService, private _router: Router, private _matDialog: MatDialog) {
     this.users = Object.assign([], new User())
-    // console.log(this.users)
   }
   ngOnInit(): void {
-    this.matDialog.afterAllClosed.subscribe((users: any) => {
+    this._matDialog.afterAllClosed.subscribe((users: any) => {
       if (users && Object.keys(users).length !== 0) {
         this.users.splice(0, 0, ...[users])
 
         this.calculateBmr();
       }
-      this.matDialog.closeAll();
+      this._matDialog.closeAll();
     })
     this.getUsers();
 
@@ -53,7 +52,7 @@ export class UserDataComponent implements OnInit {
 
 
   getUsers() {
-    this.userService.getUsersInfo().subscribe(users => {
+    this._userService.getUsersInfo().subscribe(users => {
       this.users = users
       // console.log(users)
       for (let user of users) {
@@ -63,34 +62,34 @@ export class UserDataComponent implements OnInit {
     });
   }
   deleteUser(_id: any, i: number) {
-    this.userService.deleteUserInfo(_id).subscribe(users => {
+    this._userService.deleteUserInfo(_id).subscribe(users => {
       this.users.splice(i, 1)
     })
   }
 
   updateUser(_id: any) {
-    const userData = this.userService.getUserById(_id).subscribe(users => {
+    const userData = this._userService.getUserById(_id).subscribe(users => {
       this.users = users
     })
 
-    this.userService.updateUsersInfo(_id).subscribe(users => {
+    this._userService.updateUsersInfo(_id).subscribe(users => {
       this.users = users
     })
   }
   addUser() {
-    this.router.navigate(['user-registration'])
+    this._router.navigate(['user-registration'])
   }
   addRecords(_id: any, calender: false) {
-    this.router.navigate(['add-records', _id, calender])
+    this._router.navigate(['add-records', _id, calender])
   }
   viewRecords(_id: any, calender: true) {
-    this.router.navigate(['view-records', _id, calender])
+    this._router.navigate(['view-records', _id, calender])
   }
 
 
 
   openDialog() {
-    this.matDialog.open(UserRegistrationComponent, {
+    this._matDialog.open(UserRegistrationComponent, {
       data: [
       ]
     });
