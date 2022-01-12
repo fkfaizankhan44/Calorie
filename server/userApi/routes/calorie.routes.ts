@@ -8,10 +8,6 @@ export class CalorieData {
     router = express.Router()
 
     async getData(req: express.Request, res: express.Response) {
-
-
-        console.log(req.query)
-        // console.log(req.query.creationDate)
         try {
             const objectData = { status: Status.ACTIVE } as any
 
@@ -32,9 +28,7 @@ export class CalorieData {
                     if (start && end) {
                         objectData.creationDate = { $lte: end, $gte: start }
                     }
-
                 }
-
             }
 
             const calories = await Calorie.find(objectData).sort({ "creationDate": -1 })
